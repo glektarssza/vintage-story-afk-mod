@@ -1,0 +1,14 @@
+asexplicit
+ensurepath
+generis
+glek
+glektarssza
+mapfile
+netrwhist
+noconfirm
+noninfringement
+pacman
+pipx
+remotehub
+sessionx
+tarssza
