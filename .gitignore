@@ -50,3 +50,6 @@ ctags
 [Oo]bj/
 [Tt]est[Rr]esults/
 [Cc]overage/
+
+# User Settings #
+[Uu]ser.props
