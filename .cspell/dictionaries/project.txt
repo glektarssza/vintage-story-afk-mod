@@ -1,10 +1,12 @@
 asexplicit
 ensurepath
+esults
 generis
 glek
 glektarssza
 mapfile
 netrwhist
+newtonsoft
 noconfirm
 noninfringement
 pacman
@@ -12,3 +14,4 @@ pipx
 remotehub
 sessionx
 tarssza
+vintagestory
