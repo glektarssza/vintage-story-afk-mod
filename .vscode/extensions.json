@@ -3,6 +3,12 @@
         "EditorConfig.EditorConfig",
         "github.remotehub",
         "github.vscode-pull-request-github",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "tintoy.msbuild-project-tools",
+        "josephwoodward.vscodeilviewer",
+        "k--kato.docomment",
+        "ms-vscode.mono-debug"
     ]
 }
