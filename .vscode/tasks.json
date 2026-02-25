@@ -3,7 +3,7 @@
     "tasks": [
         {
             "label": "dotnet:restore",
-            "detail": "Restore the mod depedencies.",
+            "detail": "Restore the mod dependencies.",
             "icon": {
                 "id": "cloud-download",
                 "color": "terminal.ansiWhite"
