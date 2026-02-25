@@ -51,5 +51,8 @@ ctags
 [Tt]est[Rr]esults/
 [Cc]overage/
 
+## CakeBuild ##
+[Dd]ist/
+
 # User Settings #
 [Uu]ser.props
