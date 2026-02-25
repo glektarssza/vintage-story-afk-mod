@@ -1,4 +1,4 @@
-﻿namespace Glek.VintageStory.AFKMod;
+namespace Glek.VintageStory.AFKMod;
 
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
