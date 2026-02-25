@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://json.schemastore.org/dependabot-2.0.json
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: .github/workflows/
+    labels:
+      - Dependency
+    groups:
+      security-updates:
+        dependency-type: production
+        applies-to: security-updates
+      development-security-updates:
+        dependency-type: development
+        applies-to: security-updates
+      version-updates:
+        dependency-type: production
+        applies-to: version-updates
+      development-version-updates:
+        dependency-type: development
+        applies-to: version-updates
+    schedule:
+      interval: weekly
+      day: wednesday
+      time: '12:00'
+      timezone: Canada/Mountain
