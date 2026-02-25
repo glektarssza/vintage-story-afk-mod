@@ -70,4 +70,4 @@ jobs:
         name: Lint
         shell: bash
         run: |
-          pre-commit run --all-files
+          dotnet format -v:d --no-restore --verify-no-changes
