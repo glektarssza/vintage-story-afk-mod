@@ -46,15 +46,13 @@ jobs:
           python-version: '3.13'
       - id: prepare-pipx
         name: Prepare pipx
-        shell: bash
         run: |
           python3 -m pip install --user pipx;
           python3 -m pipx ensurepath;
       - id: prepare-pre-commit
         name: Prepare pre-commit
-        shell: bash
         run: |
-          pipx install pre-commit;
+          pipx install pre-commit
       - id: setup-dotnet
         name: Setup .NET
         uses: actions/setup-dotnet@v5
@@ -68,6 +66,5 @@ jobs:
         run: dotnet restore
       - id: lint
         name: Lint
-        shell: bash
         run: |
           pre-commit run --all-files
