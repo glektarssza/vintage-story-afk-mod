@@ -59,7 +59,7 @@ jobs:
         name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 10.x.x
+          global-json-file: global.json
           cache: true
           cache-dependency-path: |
             **/packages.lock.json
@@ -70,4 +70,4 @@ jobs:
         name: Lint
         shell: bash
         run: |
-          dotnet format -v:d --no-restore --verify-no-changes
+          pre-commit run --all-files
