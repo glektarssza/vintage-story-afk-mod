@@ -1,0 +1,93 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Client (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/VintagestoryServer",
+            "windows": {
+                "program": "${env:VINTAGE_STORY}/VintagestoryServer.exe"
+            },
+            "preLaunchTask": "build",
+            "args": [
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/bin/Debug/Mods"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Client - Play Style Preset (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/VintagestoryServer",
+            "windows": {
+                "program": "${env:VINTAGE_STORY}/VintagestoryServer.exe"
+            },
+            "preLaunchTask": "build",
+            "args": [
+                "--playStyle",
+                "${input:playStyle}",
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/bin/Debug/Mods"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Client - Open World (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/VintagestoryServer",
+            "windows": {
+                "program": "${env:VINTAGE_STORY}/VintagestoryServer.exe"
+            },
+            "preLaunchTask": "build",
+            "args": [
+                "--openWorld",
+                "modding test world",
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/bin/Debug/Mods"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Server (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/VintagestoryServer",
+            "windows": {
+                "program": "${env:VINTAGE_STORY}/VintagestoryServer.exe"
+            },
+            "preLaunchTask": "dotnet:build:debug",
+            "args": [
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/bin/Debug/Mods"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ],
+    "inputs": [
+        {
+            "id": "playStyle",
+            "type": "pickString",
+            "description": "The play style to use when starting the game.",
+            "default": "preset-surviveandbuild",
+            "options": ["preset-surviveandbuild"]
+        },
+        {
+            "id": "playStyle",
+            "type": "pickString",
+            "description": "The play style to use when starting the game.",
+            "default": "preset-surviveandbuild",
+            "options": ["preset-surviveandbuild"]
+        }
+    ]
+}

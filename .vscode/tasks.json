@@ -1,0 +1,194 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "dotnet:restore",
+            "detail": "Restore the mod dependencies.",
+            "icon": {
+                "id": "cloud-download",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "isDefault": false,
+                "kind": "none"
+            },
+            "dependsOn": ["dotnet:build:release"],
+            "dependsOrder": "sequence",
+            "hide": false,
+            "isBackground": false,
+            "promptOnClose": false,
+            "type": "process",
+            "command": "dotnet",
+            "args": ["restore"],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "prompt",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "dotnet:build",
+            "detail": "Build the mod.",
+            "icon": {
+                "id": "tools",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            },
+            "dependsOn": ["dotnet:build:release"],
+            "dependsOrder": "sequence",
+            "hide": false,
+            "isBackground": false,
+            "promptOnClose": false,
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "prompt",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "dotnet:build:all",
+            "detail": "Build the mod in both debug and release modes.",
+            "icon": {
+                "id": "tools",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "isDefault": false,
+                "kind": "build"
+            },
+            "dependsOn": ["dotnet:build:debug", "dotnet:build:release"],
+            "dependsOrder": "parallel",
+            "hide": false,
+            "isBackground": false,
+            "promptOnClose": false,
+            "type": "shell",
+            "command": "echo",
+            "args": ["Build completed"],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "prompt",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "dotnet:build:debug",
+            "detail": "Build the mod in debug mode.",
+            "icon": {
+                "id": "tools",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "isDefault": false,
+                "kind": "build"
+            },
+            "dependsOn": ["dotnet:restore"],
+            "dependsOrder": "sequence",
+            "hide": false,
+            "isBackground": false,
+            "promptOnClose": false,
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "--no-restore",
+                "-c",
+                "Debug",
+                "${workspaceFolder}/Glek.VintageStory.AFKMod.csproj"
+            ],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "prompt",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:release",
+            "detail": "Build the mod in release mode.",
+            "icon": {
+                "id": "tools",
+                "color": "terminal.ansiWhite"
+            },
+            "group": {
+                "isDefault": false,
+                "kind": "build"
+            },
+            "dependsOn": ["dotnet:restore"],
+            "dependsOrder": "sequence",
+            "hide": false,
+            "isBackground": false,
+            "promptOnClose": false,
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "--no-restore",
+                "-c",
+                "Release",
+                "${workspaceFolder}/Glek.VintageStory.AFKMod.csproj"
+            ],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "prompt",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

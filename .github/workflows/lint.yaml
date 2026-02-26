@@ -35,7 +35,7 @@ jobs:
     steps:
       - id: clone-repository
         name: Clone the repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           lfs: true
           token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
@@ -46,17 +46,25 @@ jobs:
           python-version: '3.13'
       - id: prepare-pipx
         name: Prepare pipx
-        shell: bash
         run: |
           python3 -m pip install --user pipx;
           python3 -m pipx ensurepath;
       - id: prepare-pre-commit
         name: Prepare pre-commit
-        shell: bash
         run: |
-          pipx install pre-commit;
+          pipx install pre-commit
+      - id: setup-dotnet
+        name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: |
+            **/packages.lock.json
+      - id: restore-dependencies
+        name: Restore dependencies
+        run: dotnet restore
       - id: lint
         name: Lint
-        shell: bash
         run: |
           pre-commit run --all-files
