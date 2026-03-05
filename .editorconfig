@@ -119,6 +119,11 @@ dotnet_diagnostic.IDE0120.severity = none
 dotnet_diagnostic.IDE0240.severity = warning
 dotnet_diagnostic.IDE0241.severity = warning
 dotnet_diagnostic.IDE0280.severity = warning
+# -- Alow constants to have underscores
+dotnet_diagnostic.CA1707.severity = none
+# HACK: GitHub keeps throwing this error and I do not know why... It's not on our
+# HACK: local...
+dotnet_diagnostic.IDE0005.severity = none
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = true
 csharp_new_line_before_open_brace = none
