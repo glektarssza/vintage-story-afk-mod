@@ -186,9 +186,9 @@ dotnet_naming_style.internal_error_style.required_suffix = ____INTERNAL_ERROR___
 dotnet_naming_symbols.constant_fields_group.applicable_accessibilities = public, protected, protected_internal, private
 dotnet_naming_symbols.constant_fields_group.applicable_kinds = field
 dotnet_naming_symbols.constant_fields_group.required_modifiers = const
-dotnet_naming_rule.constant_fields_must_be_pascal_case_rule.symbols = constant_fields_group
-dotnet_naming_rule.constant_fields_must_be_pascal_case_rule.style = pascal_case_style
-dotnet_naming_rule.constant_fields_must_be_pascal_case_rule.severity = warning
+dotnet_naming_rule.constant_fields_must_be_upper_case_rule.symbols = constant_fields_group
+dotnet_naming_rule.constant_fields_must_be_upper_case_rule.style = constant_style
+dotnet_naming_rule.constant_fields_must_be_upper_case_rule.severity = warning
 
 # Static readonly fields should be pascal case
 dotnet_naming_symbols.static_readonly_fields_group.applicable_accessibilities = public
