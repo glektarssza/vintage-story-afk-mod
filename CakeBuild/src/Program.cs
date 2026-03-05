@@ -25,7 +25,7 @@ public static class Program {
 
 public class BuildContext : FrostingContext {
     public static readonly string ProjectRootPath = Path.GetFullPath("..");
-    public const string ProjectName = "Glek.VintageStory.AFKMod";
+    public const string PROJECT_NAME = "Glek.VintageStory.AFKMod";
     public string BuildConfiguration { get; }
     public string Version { get; }
     public string Name { get; }
@@ -35,7 +35,7 @@ public class BuildContext : FrostingContext {
         : base(context) {
         this.BuildConfiguration = context.Argument("configuration", "Release");
         this.SkipJsonValidation = context.Argument("skipJsonValidation", false);
-        var modInfo = context.DeserializeJsonFromFile<ModInfo>($"../{ProjectName}/modinfo.json");
+        var modInfo = context.DeserializeJsonFromFile<ModInfo>($"../{PROJECT_NAME}/modinfo.json");
         this.Version = modInfo.Version;
         this.Name = modInfo.ModID;
     }
@@ -47,7 +47,7 @@ public sealed class ValidateJsonTask : FrostingTask<BuildContext> {
         if (context.SkipJsonValidation) {
             return;
         }
-        var jsonFiles = context.GetFiles($"../{BuildContext.ProjectName}/assets/**/*.json");
+        var jsonFiles = context.GetFiles($"../{BuildContext.PROJECT_NAME}/assets/**/*.json");
         foreach (var file in jsonFiles) {
             try {
                 var json = File.ReadAllText(file.FullPath);
@@ -64,8 +64,8 @@ public sealed class ValidateJsonTask : FrostingTask<BuildContext> {
 public sealed class BuildTask : FrostingTask<BuildContext> {
     public static readonly string ProjectFilePath = Path.Join(
         BuildContext.ProjectRootPath,
-        $"{BuildContext.ProjectName}",
-        $"{BuildContext.ProjectName}.csproj"
+        $"{BuildContext.PROJECT_NAME}",
+        $"{BuildContext.PROJECT_NAME}.csproj"
     );
 
     public override void Run(BuildContext context) {
@@ -87,19 +87,19 @@ public sealed class BuildTask : FrostingTask<BuildContext> {
 public sealed class PackageTask : FrostingTask<BuildContext> {
     public static readonly string ProjectAssetsRootPath = Path.Join(
         BuildContext.ProjectRootPath,
-        BuildContext.ProjectName,
+        BuildContext.PROJECT_NAME,
         "assets"
     );
 
     public static readonly string ProjectModInfoPath = Path.Join(
         BuildContext.ProjectRootPath,
-        BuildContext.ProjectName,
+        BuildContext.PROJECT_NAME,
         "modinfo.json"
     );
 
     public static readonly string ProjectModIconPath = Path.Join(
         BuildContext.ProjectRootPath,
-        BuildContext.ProjectName,
+        BuildContext.PROJECT_NAME,
         "modicon.png"
     );
 
@@ -114,7 +114,7 @@ public sealed class PackageTask : FrostingTask<BuildContext> {
         var assetsBuildPath = Path.Join(buildPath, "assets");
         var builtCodePath = Path.Join(
             BuildContext.ProjectRootPath,
-            BuildContext.ProjectName,
+            BuildContext.PROJECT_NAME,
             "bin",
             context.BuildConfiguration,
             "Mods",
