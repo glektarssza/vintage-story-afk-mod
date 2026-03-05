@@ -8,6 +8,7 @@ docomment
 dotnettools
 ensurepath
 esults
+finalizer
 generis
 glek
 gleksafkmod
