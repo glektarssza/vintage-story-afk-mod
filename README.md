@@ -99,7 +99,7 @@ This template repository is set up to support the following:
 
 ## License ##
 
-Copyright (c) 2025 to present G'lek Tarssza
+Copyright (c) 2026 to present G'lek Tarssza
 
 Licensed under a customized MIT license.
 
