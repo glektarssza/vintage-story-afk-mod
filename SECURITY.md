@@ -4,15 +4,15 @@
 
 The table explains which versions are currently being supported versus not.
 
-| Version         | Supported          |
-| --------------- | ------------------ |
-| <VERSION_RANGE> | :white_check_mark: |
-| <VERSION_RANGE> | :x:                |
+| Version | Supported          |
+| ------- | ------------------ |
+| N/A     | :white_check_mark: |
+| N/A     | :x:                |
 
 ## Reporting a Vulnerability ##
 
 To report possible security vulnerabilities with supported versions, please use
-our [official GitHub security page](https://github.com/glektarssza/repository-template/security).
+our [official GitHub security page](https://github.com/glektarssza/vintage-story-afk-mod/security).
 
 This is the quickest and easiest way to report possible security vulnerabilities
 and get the attention of developers working on the project.
