@@ -17,3 +17,21 @@ updates:
       day: wednesday
       time: '12:00'
       timezone: Canada/Mountain
+  - directory: /
+    package-ecosystem: nuget
+    patterns:
+      - '*'
+    ignore: []
+    target-branch: main
+    rebase-strategy: auto
+    commit-message:
+      include: scope
+      prefix: '[Dependabot] '
+    labels:
+      - Dependency
+    versioning-strategy: increase
+    schedule:
+      interval: weekly
+      day: wednesday
+      time: '12:00'
+      timezone: Canada/Mountain
