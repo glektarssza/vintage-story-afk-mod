@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <TargetFramework>net10.0</TargetFramework>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <OutputPath>bin/$(Configuration)/Mods/mod</OutputPath>
@@ -9,6 +10,15 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <PropertyGroup>
+        <Version>0.1.0</Version>
+        <Title>G'lek's Vintage Story AFK Mod</Title>
+        <Product>G'lek's Vintage Story AFK Mod</Product>
+        <Description>A mod for Vintage Story that lets players go AFK and preserves their health/hunger while they are plus makes them immune to targeting/damage.</Description>
+        <InformationalVersion>$(Version)-$(Configuration)</InformationalVersion>
+        <Authors>G'lek Tarssza</Authors>
+        <Copyright>Copyright (c) 2026 G'lek Tarssza</Copyright>
     </PropertyGroup>
     <ItemGroup Label="Implicit Usings">
         <Using Include="System" />

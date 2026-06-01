@@ -1,6 +1,5 @@
 namespace CakeBuild;
 
-using System;
 using System.IO;
 
 using Cake.Common;
