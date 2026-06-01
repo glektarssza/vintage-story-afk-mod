@@ -19,7 +19,9 @@
         "fonts",
         "filetypes",
         "shell",
-        "bash"
+        "bash",
+        "dotnet",
+        "csharp"
     ],
     "import": ["./.cspell/configs/project-dictionary.json"],
     "enableGlobDot": true,
