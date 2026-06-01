@@ -26,9 +26,9 @@ on:
            * "release"
         type: string
         required: true
-      upload-coverage-reports:
+      upload-coverage-artifacts:
         description: |
-          Whether to upload the coverage reports.
+          Whether to upload the coverage artifacts.
         type: boolean
         required: false
         default: false
@@ -57,6 +57,8 @@ jobs:
     permissions:
       # -- To clone repository
       contents: read
+      # -- To write coverage reports
+      code-quality: write
     steps:
       - id: checkout
         name: Checkout
@@ -64,7 +66,7 @@ jobs:
         with:
           ref: ${{inputs.ref}}
           lfs: true
-          token: ${{secrets.GITHUB_TOKEN || secrets.github-token}}
+          token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
       - id: setup-dotnet
         name: Setup .NET
         uses: actions/setup-dotnet@v5
@@ -101,15 +103,39 @@ jobs:
       - id: test
         name: Test
         run: dotnet test --no-build --configuration ${{inputs.build-config}} --settings xplat_coverage.runsettings
+      - id: check-should-generate-coverage-reports
+        name: Check if should generate coverage reports
+        run: |
+          if [[ -n "$(find . -type f -iname "coverage.cobertura.xml")" ]]; then
+            echo "has-coverage-reports=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "has-coverage-reports=false" >> "${GITHUB_OUTPUT}"
+          fi
       - id: generate-html-report
+        if: steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
         name: Generate HTML report
-        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage/html" "-reporttypes:Html" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
+        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:${{github.workspace}}/coverage/html" "-reporttypes:Html" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
       - id: generate-dark-html-report
+        if: steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
         name: Generate dark HTML report
-        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage/html_dark" "-reporttypes:Html_Dark" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
+        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:${{github.workspace}}/coverage/html_dark" "-reporttypes:Html_Dark" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
+      - id: generate-merged-report
+        if: steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
+        name: Generate merged report
+        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:${{github.workspace}}/coverage/merged" "-reporttypes:Cobertura" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
       - id: upload-coverage-reports
         name: Upload coverage reports
-        if: ${{inputs.upload-coverage-reports}}
+        if: steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
+        uses: actions/upload-code-coverage@v1
+        with:
+          file: ${{github.workspace}}/coverage/merged/Cobertura.xml
+          token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
+          label: G'lek's Vintage Story AFK Mod Code Coverage Report
+          language: C#
+          fail-on-error: true
+      - id: upload-coverage-artifacts
+        name: Upload coverage artifacts
+        if: inputs.upload-coverage-artifacts && steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
         uses: actions/upload-artifact@v7
         with:
           name: coverage-reports
