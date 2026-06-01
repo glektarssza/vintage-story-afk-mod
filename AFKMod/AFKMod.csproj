@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <OutputPath>bin/$(Configuration)/Mods/mod</OutputPath>
+        <RootNamespace>GlekTarssza.VintageStory.AFKMod</RootNamespace>
+        <ProjectDir>$(MSBuildProjectDirectory)/src/</ProjectDir>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup Label="Implicit Usings">
+        <Using Include="System" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="VintagestoryAPI">
+            <HintPath>C:/Users/roblo/AppData/Roaming/Vintagestory/VintagestoryAPI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="VSSurvivalMod">
+            <HintPath>C:/Users/roblo/AppData/Roaming/Vintagestory/Mods/VSSurvivalMod.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="VSEssentials">
+            <HintPath>C:/Users/roblo/AppData/Roaming/Vintagestory/Mods/VSEssentials.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Newtonsoft.Json">
+            <HintPath>C:/Users/roblo/AppData/Roaming/Vintagestory/Lib/Newtonsoft.Json.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="0Harmony">
+            <HintPath>C:/Users/roblo/AppData/Roaming/Vintagestory/Lib/0Harmony.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="VintagestoryLib">
+            <HintPath>C:/Users/roblo/AppData/Roaming/Vintagestory/VintagestoryLib.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="modinfo.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="modicon.png" Condition="Exists('modicon.png')">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+</Project>
