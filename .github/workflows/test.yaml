@@ -103,10 +103,10 @@ jobs:
         run: dotnet test --no-build --configuration ${{inputs.build-config}} --settings xplat_coverage.runsettings
       - id: generate-html-report
         name: Generate HTML report
-        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage/html" "-reporttypes:Html" "-title:G'lekcraft Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
+        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage/html" "-reporttypes:Html" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
       - id: generate-dark-html-report
         name: Generate dark HTML report
-        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage/html_dark" "-reporttypes:Html_Dark" "-title:G'lekcraft Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
+        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage/html_dark" "-reporttypes:Html_Dark" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
       - id: upload-coverage-reports
         name: Upload coverage reports
         if: ${{inputs.upload-coverage-reports}}

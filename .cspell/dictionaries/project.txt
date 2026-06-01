@@ -34,3 +34,11 @@ tintoy
 vctools
 vintagestory
 vscodeilviewer
+xvzf
+xplat
+runsettings
+globaltool
+targetdir
+reporttypes
+assemblyfilters
+autofac
