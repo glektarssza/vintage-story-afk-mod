@@ -2,6 +2,7 @@ accessibilities
 afkmod
 asexplicit
 atlmfc
+autobuild
 coreclr
 csdevkit
 eleases
@@ -25,6 +26,7 @@ noninfringement
 pacman
 pipx
 remotehub
+reportgenerator
 safecrlf
 sessionx
 tarssza
