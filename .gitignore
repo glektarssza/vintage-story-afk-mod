@@ -47,6 +47,10 @@ ctags
 # User Properties #
 [Uu]ser.props
 
+# Cache #
+## Vintage Story Install ##
+vs_install/
+
 # Artifacts #
 ## dotnet ##
 [Bb]in/
