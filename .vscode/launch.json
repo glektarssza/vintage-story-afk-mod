@@ -1,0 +1,146 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Client (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/Vintagestory.exe",
+            "linux": {
+                "program": "${env:VINTAGE_STORY}/Vintagestory"
+            },
+            "osx": {
+                "program": "${env:VINTAGE_STORY}/Vintagestory"
+            },
+            "preLaunchTask": "dotnet:build",
+            "args": [
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/vintage_story_afk_mod/bin/Debug/Mods",
+                "--addOrigin",
+                "${workspaceFolder}/vintage_story_afk_mod/assets"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Client (Debug w/ World)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/Vintagestory.exe",
+            "linux": {
+                "program": "${env:VINTAGE_STORY}/Vintagestory"
+            },
+            "osx": {
+                "program": "${env:VINTAGE_STORY}/Vintagestory"
+            },
+            "preLaunchTask": "dotnet:build",
+            "args": [
+                "--openWorld",
+                "${input:worldName}",
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/vintage_story_afk_mod/bin/Debug/Mods",
+                "--addOrigin",
+                "${workspaceFolder}/vintage_story_afk_mod/assets"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Client (Debug w/ Preset)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/Vintagestory.exe",
+            "linux": {
+                "program": "${env:VINTAGE_STORY}/Vintagestory"
+            },
+            "osx": {
+                "program": "${env:VINTAGE_STORY}/Vintagestory"
+            },
+            "preLaunchTask": "dotnet:build",
+            "args": [
+                "--playStyle",
+                "${input:presetName}",
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/vintage_story_afk_mod/bin/Debug/Mods",
+                "--addOrigin",
+                "${workspaceFolder}/vintage_story_afk_mod/assets"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Client (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/Vintagestory.exe",
+            "linux": {
+                "program": "${env:VINTAGE_STORY}/Vintagestory"
+            },
+            "osx": {
+                "program": "${env:VINTAGE_STORY}/Vintagestory"
+            },
+            "preLaunchTask": "dotnet:build",
+            "args": [
+                "--playStyle",
+                "${input:presetName}",
+                "--openWorld",
+                "${input:worldName}",
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/vintage_story_afk_mod/bin/Debug/Mods",
+                "--addOrigin",
+                "${workspaceFolder}/vintage_story_afk_mod/assets"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Server",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${env:VINTAGE_STORY}/VintagestoryServer.exe",
+            "linux": {
+                "program": "${env:VINTAGE_STORY}/VintagestoryServer"
+            },
+            "osx": {
+                "program": "${env:VINTAGE_STORY}/VintagestoryServer"
+            },
+            "preLaunchTask": "dotnet:build",
+            "args": [
+                "--tracelog",
+                "--addModPath",
+                "${workspaceFolder}/vintage_story_afk_mod/bin/Debug/Mods",
+                "--addOrigin",
+                "${workspaceFolder}/vintage_story_afk_mod/assets"
+            ],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "CakeBuild",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet:build:cake",
+            "program": "${workspaceFolder}/CakeBuild/bin/Debug/CakeBuild.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CakeBuild",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "worldName",
+            "type": "promptString",
+            "description": "The name of the world to load."
+        },
+        {
+            "id": "presetName",
+            "type": "promptString",
+            "description": "The name of the preset to load."
+        }
+    ]
+}
