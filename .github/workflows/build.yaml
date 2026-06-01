@@ -16,7 +16,9 @@ on:
           default branch is used.
         type: string
         required: false
-        default: ${{github.sha || github.ref || github.event.repository.default_branch}}
+        default:
+          ${{github.sha || github.ref ||
+          github.event.repository.default_branch}}
       build-config:
         description: |
           The configuration to build.
@@ -87,6 +89,12 @@ jobs:
           ref: ${{inputs.ref}}
           lfs: true
           token: ${{secrets.GITHUB_TOKEN || secrets.github-token}}
+      - id: install-os-dependencies
+        name: Install OS dependencies
+        run: |
+          sudo apt update && \
+          sudo apt install --assume-yes --no-install-recommends rename && \
+          sudo rm -rf /var/lib/apt/lists/*
       - id: setup-dotnet
         name: Setup .NET
         uses: actions/setup-dotnet@v5
@@ -116,7 +124,9 @@ jobs:
         run: dotnet restore
       - id: build
         name: Build
-        run: ${{github.workspace}}/build.sh --configuration ${{inputs.build-config}}
+        run:
+          ${{github.workspace}}/build.sh --configuration
+          ${{inputs.build-config}}
       - id: rename-artifact
         name: Rename artifacts
         run: |
