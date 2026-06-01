@@ -43,3 +43,9 @@ ctags
 # Cache #
 ## CSpell ##
 .cspellcache
+
+# Artifacts #
+## dotnet ##
+[Bb]in/
+[Oo]bj/
+[Rr]eleases/
