@@ -89,12 +89,6 @@ jobs:
           ref: ${{inputs.ref}}
           lfs: true
           token: ${{secrets.GITHUB_TOKEN || secrets.github-token}}
-      - id: install-os-dependencies
-        name: Install OS dependencies
-        run: |
-          sudo apt update && \
-          sudo apt install --assume-yes --no-install-recommends rename && \
-          sudo rm -rf /var/lib/apt/lists/*
       - id: setup-dotnet
         name: Setup .NET
         uses: actions/setup-dotnet@v5
@@ -124,14 +118,8 @@ jobs:
         run: dotnet restore
       - id: build
         name: Build
-        run:
-          ${{github.workspace}}/build.sh --configuration
-          ${{inputs.build-config}}
-      - id: rename-artifact
-        name: Rename artifacts
         run: |
-          rename -- '_' '-' ${{github.workspace}}/Releases/*.zip
-          rename -- '.zip' '-${{inputs.build-config}}' ${{github.workspace}}/Releases/*.zip
+          ${{github.workspace}}/build.sh --configuration ${{inputs.build-config}}
       - id: upload-artifacts
         name: Upload artifacts
         if: inputs.upload-artifacts
