@@ -44,6 +44,9 @@ ctags
 ## CSpell ##
 .cspellcache
 
+# User Properties #
+[Uu]ser.props
+
 # Artifacts #
 ## dotnet ##
 [Bb]in/
