@@ -5,6 +5,38 @@ on:
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 jobs:
+  build:
+    name: Build
+    permissions:
+      # -- Needed to clone the repository
+      contents: read
+    strategy:
+      matrix:
+        build-config:
+          - debug
+          - release
+      fail-fast: true
+    uses: ./.github/workflows/build.yaml
+    with:
+      build-config: ${{matrix.build-config}}
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
+  test:
+    name: Test
+    permissions:
+      # -- Needed to clone the repository
+      contents: read
+    strategy:
+      matrix:
+        build-config:
+          - debug
+          - release
+      fail-fast: true
+    uses: ./.github/workflows/test.yaml
+    with:
+      build-config: ${{matrix.build-config}}
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
   lint:
     name: Lint
     permissions:
