@@ -1,10 +1,13 @@
+afkmod
 asexplicit
+eleases
 ensurepath
 generis
 glek
 glektarssza
 hookspath
 iregex
+lastexitcode
 mapfile
 mpre
 netrwhist
@@ -16,3 +19,4 @@ remotehub
 safecrlf
 sessionx
 tarssza
+vintagestory
