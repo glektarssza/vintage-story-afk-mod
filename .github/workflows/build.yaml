@@ -1,0 +1,135 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Build
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: |
+          The Git reference from which to clone the project.
+
+          This can be any valid Git commit-ish (e.g. a SHA, a ref, a tag, and so
+          on).
+
+          Defaults to the SHA that caused the workflow to be triggered. If that
+          is unavailable the fully formed reference of the branch or tag that
+          triggered the workflow is used. If that is unavailable the repository
+          default branch is used.
+        type: string
+        required: false
+        default: ${{github.sha || github.ref || github.event.repository.default_branch}}
+      build-config:
+        description: |
+          The configuration to build.
+
+          Valid options are:
+           * "debug"
+           * "release"
+        required: true
+        type: string
+      upload-artifacts:
+        description: |
+          Whether to upload artifacts.
+
+          Defaults to `true`.
+        type: boolean
+        required: false
+        default: true
+      artifact-retention-days:
+        description: |
+          The duration, in days, to retain artifacts for.
+
+          Defaults to `0` which defaults to the value configured for the
+          repository.
+        type: number
+        required: false
+        default: 0
+    outputs:
+      artifact-name:
+        description: |
+          The name of the artifact that was created.
+        value: ${{jobs.build.outputs.artifact-name}}
+      artifact-id:
+        description: |
+          The ID of the artifact that was created.
+        value: ${{jobs.build.outputs.artifact-id}}
+      artifact-digest:
+        description: |
+          The digest of the artifact that was created.
+        value: ${{jobs.build.outputs.artifact-digest}}
+      artifact-url:
+        description: |
+          The download URL of the artifact that was created.
+        value: ${{jobs.build.outputs.artifact-url}}
+    secrets:
+      github-token:
+        description: |
+          The token to use for making authenticated requests to the GitHub API.
+        required: true
+env:
+  GH_TOKEN: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      # -- To clone repository
+      contents: read
+    outputs:
+      artifact-name: dist-${{inputs.build-config}}
+      artifact-id: ${{steps.upload-artifacts.outputs.artifact-id}}
+      artifact-digest: ${{steps.upload-artifacts.outputs.artifact-digest}}
+      artifact-url: ${{steps.upload-artifacts.outputs.artifact-url}}
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{inputs.ref}}
+          lfs: true
+          token: ${{secrets.GITHUB_TOKEN || secrets.github-token}}
+      - id: setup-dotnet
+        name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: |
+            ${{github.workspace}}/AFKMod/packages.lock.json
+            ${{github.workspace}}/CakeBuild/packages.lock.json
+      - id: download-vintage-story
+        name: Download Vintage Story
+        run: |
+          mkdir -p ${{github.workspace}}/vs_install/
+          wget https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_1.22.3.tar.gz -O ${{github.workspace}}/vs_install/vs_client_linux-x64_1.22.3.tar.gz
+          tar -C ${{github.workspace}}/vs_install/ -xvzf ${{github.workspace}}/vs_install/vs_client_linux-x64_1.22.3.tar.gz
+          cat > user.props <<HEREDOC
+          <?xml version="1.0" encoding="UTF-8"?>
+          <Project>
+              <PropertyGroup>
+                  <VintageStoryInstallPath>${{github.workspace}}/vs_install/vintagestory/</VintageStoryInstallPath>
+              </PropertyGroup>
+          </Project>
+          HEREDOC
+          rm ${{github.workspace}}/vs_install/vs_client_linux-x64_1.22.3.tar.gz
+      - id: restore-dependencies
+        name: Restore dependencies
+        run: dotnet restore
+      - id: build
+        name: Build
+        run: ${{github.workspace}}/build.sh --configuration ${{inputs.build-config}}
+      - id: rename-artifact
+        name: Rename artifacts
+        run: |
+          rename -- '_' '-' ${{github.workspace}}/Releases/*.zip
+          rename -- '.zip' '-${{inputs.build-config}}' ${{github.workspace}}/Releases/*.zip
+      - id: upload-artifacts
+        name: Upload artifacts
+        if: inputs.upload-artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          path: ${{github.workspace}}/Releases/*.zip
+          archive: false
+          compression-level: 0
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: ${{inputs.artifact-retention-days}}
