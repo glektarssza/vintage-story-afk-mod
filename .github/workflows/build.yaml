@@ -16,8 +16,7 @@ on:
           default branch is used.
         type: string
         required: false
-        default:
-          ${{github.sha || github.ref ||
+        default: ${{github.sha || github.ref ||
           github.event.repository.default_branch}}
       build-config:
         description: |
@@ -125,7 +124,7 @@ jobs:
         if: inputs.upload-artifacts
         uses: actions/upload-artifact@v7
         with:
-          path: ${{github.workspace}}/Releases/*.zip
+          path: ${{github.workspace}}/dist/*.zip
           archive: false
           compression-level: 0
           if-no-files-found: error
