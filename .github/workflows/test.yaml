@@ -112,21 +112,21 @@ jobs:
             echo "has-coverage-reports=false" >> "${GITHUB_OUTPUT}"
           fi
       - id: generate-html-report
-        if: steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
+        if: fromJson(steps.check-should-generate-coverage-reports.outputs.has-coverage-reports)
         name: Generate HTML report
         run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:${{github.workspace}}/coverage/html" "-reporttypes:Html" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
       - id: generate-dark-html-report
-        if: steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
+        if: fromJson(steps.check-should-generate-coverage-reports.outputs.has-coverage-reports)
         name: Generate dark HTML report
         run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:${{github.workspace}}/coverage/html_dark" "-reporttypes:Html_Dark" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
       # -- Some day... GitHub will let us have this for all...
       # - id: generate-merged-report
-      #   if: steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
+      #   if: fromJson(steps.check-should-generate-coverage-reports.outputs.has-coverage-reports)
       #   name: Generate merged report
       #   run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:${{github.workspace}}/coverage/merged" "-reporttypes:Cobertura" "-title:G'lek's Vintage Story AFK Mod Code Coverage Report" "-assemblyfilters:-*Tests" "-license:${{secrets.reportgenerator-license}}"
       # - id: upload-coverage-reports
       #   name: Upload coverage reports
-      #   if: steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
+      #   if: fromJson(steps.check-should-generate-coverage-reports.outputs.has-coverage-reports)
       #   uses: actions/upload-code-coverage@v1
       #   with:
       #     file: ${{github.workspace}}/coverage/merged/Cobertura.xml
@@ -136,7 +136,7 @@ jobs:
       #     fail-on-error: true
       - id: upload-coverage-artifacts
         name: Upload coverage artifacts
-        if: inputs.upload-coverage-artifacts && steps.check-should-generate-coverage-reports.outputs.has-coverage-reports
+        if: inputs.upload-coverage-artifacts && fromJson(steps.check-should-generate-coverage-reports.outputs.has-coverage-reports)
         uses: actions/upload-artifact@v7
         with:
           name: coverage-reports
