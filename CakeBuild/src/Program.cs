@@ -1,3 +1,5 @@
+// !! Disable ALL style warnings in this code, it's externally generated!
+#pragma warning disable
 namespace CakeBuild;
 
 using System.IO;
