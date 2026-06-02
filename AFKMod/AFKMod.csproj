@@ -10,6 +10,8 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
+        <!-- HACK: Temporarily disable IDE0005 to work around a GitHub Actions issue -->
+        <NoWarn>IDE0005</NoWarn>
         <UserPropsPath Condition="$(UserPropsPath) == ''">$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine($(MSBuildProjectDirectory), '../user.props'))))</UserPropsPath>
     </PropertyGroup>
     <PropertyGroup Label="Assembly Properties">
