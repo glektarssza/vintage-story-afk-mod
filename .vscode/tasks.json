@@ -1,0 +1,350 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "dotnet:restore",
+            "detail": "Restore project dependencies using dotnet.",
+            "group": "none",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "cloud-download"
+            },
+            "hide": true,
+            "dependsOn": [],
+            "dependsOrder": "sequence",
+            "type": "process",
+            "command": "dotnet",
+            "args": ["restore", "${workspaceFolder}/vintage_story_afk_mod.sln"],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "silent",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build",
+            "detail": "Build the default configuration using dotnet.",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "icon": {
+                "color": "terminal.ansiCyan",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:build:mod"],
+            "dependsOrder": "sequence",
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "silent",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:mod",
+            "detail": "Build the default configuration of the mod using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiCyan",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:build:mod:debug"],
+            "dependsOrder": "sequence",
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "silent",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:mod:all",
+            "detail": "Build all configurations of the mod using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:build:mod:debug", "dotnet:build:mod:release"],
+            "dependsOrder": "parallel",
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "silent",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:mod:debug",
+            "detail": "Build the debug configuration of the mod using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:restore"],
+            "dependsOrder": "sequence",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "--no-restore",
+                "-c",
+                "Debug",
+                "${workspaceFolder}/vintage_story_afk_mod/vintage_story_afk_mod.csproj"
+            ],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "terminateOldest",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:mod:release",
+            "detail": "Build the release configuration of the mod using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:restore"],
+            "dependsOrder": "sequence",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "--no-restore",
+                "-c",
+                "Release",
+                "${workspaceFolder}/vintage_story_afk_mod/vintage_story_afk_mod.csproj"
+            ],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "terminateOldest",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:cake",
+            "detail": "Build the default configuration of CakeBuild using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:build:cake:debug"],
+            "dependsOrder": "parallel",
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "silent",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:cake:all",
+            "detail": "Build all configurations of CakeBuild using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": [
+                "dotnet:build:cake:debug",
+                "dotnet:build:cake:release"
+            ],
+            "dependsOrder": "parallel",
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "silent",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:cake:debug",
+            "detail": "Build the debug configuration of the CakeBuild project using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:restore"],
+            "dependsOrder": "sequence",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "--no-restore",
+                "-c",
+                "Debug",
+                "${workspaceFolder}/CakeBuild/CakeBuild.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:build:cake:release",
+            "detail": "Build the release configuration of the CakeBuild project using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "tools"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:restore"],
+            "dependsOrder": "sequence",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "-c",
+                "Release",
+                "${workspaceFolder}/CakeBuild/CakeBuild.csproj"
+            ],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "terminateOldest",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet:package",
+            "detail": "Run the package configuration of the CakeBuild project using dotnet.",
+            "group": "build",
+            "icon": {
+                "color": "terminal.ansiWhite",
+                "id": "package"
+            },
+            "hide": false,
+            "dependsOn": ["dotnet:build:cake:release"],
+            "dependsOrder": "sequence",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--no-build",
+                "--project",
+                "${workspaceFolder}/CakeBuild/CakeBuild.csproj"
+            ],
+            "options": {},
+            "runOptions": {
+                "instanceLimit": 1,
+                "instancePolicy": "terminateOldest",
+                "reevaluateOnRerun": true,
+                "runOn": "default"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

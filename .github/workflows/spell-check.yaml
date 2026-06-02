@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: Lint
+name: Spell Check
 on:
   workflow_call:
     inputs:
@@ -86,10 +86,11 @@ jobs:
       - id: install-cspell
         name: Install CSpell
         run: |
-          ${{inputs.package-manager}} install -g cspell \
-          @cspell/dict-cspell-bundle @cspell/dict-java @cspell/dict-fonts \
-          @cspell/dict-public-licenses @cspell/dict-gaming-terms \
-          @cspell/dict-companies @cspell/dict-git @cspell/dict-software-terms;
+          ${{inputs.package-manager}} install -g \
+          cspell @cspell/dict-fonts @cspell/dict-cspell-bundle \
+          @cspell/dict-companies @cspell/dict-git @cspell/dict-public-licenses \
+          @cspell/dict-gaming-terms @cspell/dict-software-terms \
+          @cspell/dict-csharp @cspell/dict-dotnet;
       - id: check-spelling
         name: Check Spelling
         run: |

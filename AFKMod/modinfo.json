@@ -1,0 +1,16 @@
+{
+    "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
+    "type": "Code",
+    "modId": "gleksafkmod",
+    "name": "G'leks Vintage Story AFK Mod",
+    "authors": ["G'lek Tarssza"],
+    "description": "A mod for Vintage Story that lets players go AFK and preserves their health/hunger while they are plus makes them immune to targeting/damage.",
+    "website": "https://github.com/glektarssza/vintage-story-afk-mod",
+    "version": "0.1.0",
+    "requiredOnServer": true,
+    "requiredOnClient": true,
+    "side": "Universal",
+    "dependencies": {
+        "game": "1.22.3"
+    }
+}

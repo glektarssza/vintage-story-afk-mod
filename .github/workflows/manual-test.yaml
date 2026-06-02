@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Manual Test
+on:
+  workflow_dispatch:
+    inputs:
+      upload-artifacts:
+        description: |
+          Whether to upload the coverage report.
+        type: boolean
+        required: true
+      build-config:
+        description: |
+          The configuration to build.
+
+          Valid options are:
+           * `debug`
+           * `release`
+        required: true
+        type: choice
+        options:
+          - debug
+          - release
+jobs:
+  test:
+    name: Test
+    permissions:
+      contents: read
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
+      reportgenerator-license: ${{secrets.REPORTGENERATOR_LICENSE}}
+    uses: ./.github/workflows/test.yaml
+    with:
+      build-config: ${{inputs.build-config}}
+      upload-coverage-reports: ${{inputs.upload-artifacts}}
