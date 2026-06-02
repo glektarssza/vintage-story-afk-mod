@@ -105,8 +105,10 @@ jobs:
         name: Check if should generate coverage reports
         run: |
           if [[ -n "$(find . -type f -iname "coverage.cobertura.xml")" ]]; then
+            echo "::notice::Coverage reports found, enabling coverage reporting steps..."
             echo "has-coverage-reports=true" >> "${GITHUB_OUTPUT}"
           else
+            echo "::notice::Coverage reports not found, disabling coverage reporting steps..."
             echo "has-coverage-reports=false" >> "${GITHUB_OUTPUT}"
           fi
       - id: generate-html-report
