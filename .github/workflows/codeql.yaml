@@ -33,7 +33,7 @@ jobs:
           token: ${{env.GH_TOKEN}}
       - id: setup-dotnet
         name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
           cache: true
