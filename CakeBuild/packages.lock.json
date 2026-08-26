@@ -31,9 +31,9 @@
       },
       "Cake.Json": {
         "type": "Direct",
-        "requested": "[7.0.1, )",
-        "resolved": "7.0.1",
-        "contentHash": "6prsRvYnmTWDk/xwV7H7OiXZfZzh6oaF6JP52kJiHVLYBT14WVPl566uB9nXK5Ysp3WEtflCY4QL0JrwOO0Hbg==",
+        "requested": "[11.0.0, )",
+        "resolved": "11.0.0",
+        "contentHash": "xl66llLUt5iWI00qmm0kV9XKZ9z+OGHArrBNLMPaPXxNZZgbU3wbs9oDsaVE8qCoX0AsEahpyG3zgzYyoTjEXg==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
         }
