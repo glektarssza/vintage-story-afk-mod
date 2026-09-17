@@ -18,7 +18,7 @@
         <Using Include="System" />
     </ItemGroup>
     <ItemGroup Label="Dependencies">
-        <PackageReference Include="Cake.Frosting" Version="6.2.0" />
+        <PackageReference Include="Cake.Frosting" Version="6.3.0" />
         <PackageReference Include="Cake.Json" Version="11.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
         <Reference Include="VintagestoryAPI">
